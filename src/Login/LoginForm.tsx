@@ -16,39 +16,53 @@ const LoginForm: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-100">
-      <form onSubmit={handleSubmit} className="w-full max-w-sm p-8 bg-white rounded-lg shadow-md">
-        <h2 className="mb-6 text-2xl font-bold text-center text-cyan-900">Login</h2>
-        {error && <div className="mb-4 text-sm text-cyan-900">{error}</div>}
-        <div className="mb-4">
-          <label className="block mb-1 text-cyan-900" htmlFor="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-cyan-900"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div className="mb-6">
-          <label className="block mb-1 text-cyan-900" htmlFor="password">Password</label>
-          <input
-            id="password"
-            type="password"
-            className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-cyan-900"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button
-          type="submit"
-          className="w-full py-2 font-semibold text-white transition rounded bg-gradient-to-r from-blue-900 to-cyan-900 hover:from-blue-800 hover:to-cyan-800"
-        >
-          Login
-        </button>
-      </form>
+    <div className="flex min-h-screen">
+      {/* Left side: Logo and background */}
+      <div className="relative flex flex-col items-center justify-center w-1/2 min-h-screen overflow-hidden bg-gradient-to-br from-blue-900 to-cyan-900">
+       
+        {/* Futuristic background pattern (optional, can add more for effect) */}
+        <div className="absolute inset-0 opacity-30 bg-[url('/circuit-bg.svg')] bg-cover bg-center pointer-events-none" />
+        <img src="/LOGO.png" alt="Smart Lock Logo" className="relative z-10 w-56 max-w-xs mx-auto" />
+      </div>
+      {/* Right side: Login form */}
+      <div className="flex flex-col items-center justify-center w-1/2 min-h-screen bg-white">
+        <form onSubmit={handleSubmit} className="w-full max-w-md p-12 bg-white border border-gray-100 shadow-xl rounded-2xl">
+          <h2 className="mb-10 text-4xl italic font-bold text-center text-blue-900">Login</h2>
+          {error && <div className="mb-4 text-sm text-center text-red-600">{error}</div>}
+          <div className="mb-6">
+            <label className="block mb-2 text-lg italic text-slate-600" htmlFor="email">Email:</label>
+            <input
+              id="email"
+              type="email"
+              className="w-full px-4 py-2 text-lg border rounded-full border-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-900"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-8">
+            <label className="block mb-2 text-lg italic text-slate-600" htmlFor="password">Password:</label>
+            <input
+              id="password"
+              type="password"
+              className="w-full px-4 py-2 text-lg border rounded-full border-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-900"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            className="w-full py-3 text-xl font-semibold text-white transition rounded-full bg-gradient-to-r from-blue-900 to-cyan-900 hover:from-blue-800 hover:to-cyan-800"
+          >
+            Login
+          </button>
+          <div className="mt-8 text-base text-center text-slate-400">
+            Dont have an account yet?{' '}
+            <span className="italic font-semibold text-blue-900 cursor-pointer">Sign up now</span>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
