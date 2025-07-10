@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Particles from 'react-tsparticles';
+import GenerateQRModal from '../Modals/GenerateQRModal';
 
 const HeroSection: React.FC = () => {
+  const [showQRModal, setShowQRModal] = useState(false);
   return (
     <section className="relative flex flex-col items-center justify-center min-h-[60vh] bg-gradient-to-br from-blue-200 to-blue-400 overflow-hidden">
       {/* Moving futuristic particles background */}
@@ -47,13 +49,17 @@ const HeroSection: React.FC = () => {
             <div className="absolute inset-0 transition-opacity duration-300 rounded-lg opacity-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 group-hover:opacity-100"></div>
             <div className="absolute inset-0 rounded-lg border border-transparent group-hover:border-cyan-400/50 transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(34,211,238,0.5)]"></div>
           </button>
-          <button className="relative px-8 py-4 text-xl font-semibold text-white transition-all duration-300 transform rounded-lg shadow-lg group bg-gradient-to-r from-blue-900 via-blue-900 to-cyan-900 hover:from-blue-800 hover:to-cyan-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/50 hover:-translate-y-1">
-            <span className="relative z-10">Get Started</span>
+          <button
+            className="relative px-8 py-4 text-xl font-semibold text-white transition-all duration-300 transform rounded-lg shadow-lg group bg-gradient-to-r from-blue-900 via-blue-900 to-cyan-900 hover:from-blue-800 hover:to-cyan-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/50 hover:-translate-y-1"
+            onClick={() => setShowQRModal(true)}
+          >
+            <span className="relative z-10">Generate QR </span>
             <div className="absolute inset-0 transition-opacity duration-300 rounded-lg opacity-0 bg-gradient-to-r from-blue-400/20 to-cyan-400/20 group-hover:opacity-100"></div>
             <div className="absolute inset-0 rounded-lg border border-transparent group-hover:border-blue-400/50 transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.5)]"></div>
           </button>
         </div>
       </div>
+      <GenerateQRModal isOpen={showQRModal} onClose={() => setShowQRModal(false)} />
     </section>
   );
 };
