@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const features = [
   {
@@ -13,6 +14,7 @@ const features = [
       </svg>
     ),
     label: 'QR Code-Based Entry',
+    to: '/qr-code-entry',
   },
   {
     icon: (
@@ -50,20 +52,37 @@ const features = [
   },
 ];
 
-const FeaturesSection: React.FC = () => (
-  <section className="py-16 bg-white">
-    <div className="container px-4 mx-auto">
-      <h2 className="mb-10 text-3xl font-bold text-center text-blue-800">Smart Features for Smart Access</h2>
-      <div className="grid max-w-4xl grid-cols-1 gap-8 mx-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-        {features.map((feature, idx) => (
-          <div key={idx} className="flex flex-col items-center p-6 transition rounded-lg shadow bg-blue-50 hover:shadow-lg">
-            <span className="mb-4">{feature.icon}</span>
-            <span className="text-lg font-semibold text-center text-blue-900">{feature.label}</span>
-          </div>
-        ))}
+const FeaturesSection: React.FC = () => {
+  const navigate = useNavigate();
+  return (
+    <section className="py-16 bg-white">
+      <div className="container px-4 mx-auto">
+        <h2 className="mb-10 text-3xl font-bold text-center text-blue-800">Smart Features for Smart Access</h2>
+        <div className="grid max-w-4xl grid-cols-1 gap-8 mx-auto sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+          {features.map((feature, idx) => {
+            const isClickable = Boolean(feature.to);
+            return (
+              <div
+                key={idx}
+                className={`flex flex-col items-center p-6 transition rounded-lg shadow bg-blue-50 hover:shadow-lg ${isClickable ? 'cursor-pointer hover:bg-cyan-50' : ''}`}
+                onClick={() => feature.to && navigate(feature.to)}
+                tabIndex={isClickable ? 0 : undefined}
+                {...(isClickable ? { role: 'button' } : {})}
+                onKeyDown={e => {
+                  if (isClickable && (e.key === 'Enter' || e.key === ' ')) {
+                    navigate(feature.to!);
+                  }
+                }}
+              >
+                <span className="mb-4">{feature.icon}</span>
+                <span className="text-lg font-semibold text-center text-blue-900">{feature.label}</span>
+              </div>
+            );
+          })}
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default FeaturesSection; 
